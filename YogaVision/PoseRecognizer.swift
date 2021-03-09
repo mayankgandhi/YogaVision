@@ -34,7 +34,7 @@ final class PoseRecognizer {
         allPoses.append(contentsOf: poseObservations)
       }
     }
-    
+
     do {
       let videoProcessor = VNVideoProcessor(url: assetURL)
       try videoProcessor.addRequest(visionRequest, processingOptions: VNVideoProcessor.RequestProcessingOptions())
@@ -61,3 +61,4 @@ final class PoseRecognizer {
   }
 
 }
+/Users/mayankgandhi/XcodeProjects/YogaVision/Pods

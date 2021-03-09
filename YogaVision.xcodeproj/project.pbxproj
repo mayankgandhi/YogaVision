@@ -73,6 +73,33 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		5C0DE22B25F7B80500491376 /* System */ = {
+			isa = PBXGroup;
+			children = (
+				5CC705EC25F74219000C74FE /* AppDelegate.swift */,
+				5C8E05F425F762340004D9A7 /* AppDelegate+Injection.swift */,
+				5CC705EE25F74219000C74FE /* SceneDelegate.swift */,
+			);
+			path = System;
+			sourceTree = "<group>";
+		};
+		5C0DE22C25F7B81000491376 /* VideoComponents */ = {
+			isa = PBXGroup;
+			children = (
+				5C7D6BBC25F75A2600982ED6 /* VideoPicker.swift */,
+				5C7D6BBD25F75A2600982ED6 /* VideoPlayer.swift */,
+			);
+			path = VideoComponents;
+			sourceTree = "<group>";
+		};
+		5C0DE22D25F7B81C00491376 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				5CC705F025F74219000C74FE /* ContentView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		5CC705E025F74219000C74FE = {
 			isa = PBXGroup;
 			children = (
@@ -94,12 +121,9 @@
 		5CC705EB25F74219000C74FE /* YogaVision */ = {
 			isa = PBXGroup;
 			children = (
-				5CC705EC25F74219000C74FE /* AppDelegate.swift */,
-				5C8E05F425F762340004D9A7 /* AppDelegate+Injection.swift */,
-				5CC705EE25F74219000C74FE /* SceneDelegate.swift */,
-				5CC705F025F74219000C74FE /* ContentView.swift */,
-				5C7D6BBC25F75A2600982ED6 /* VideoPicker.swift */,
-				5C7D6BBD25F75A2600982ED6 /* VideoPlayer.swift */,
+				5C0DE22B25F7B80500491376 /* System */,
+				5C0DE22D25F7B81C00491376 /* Views */,
+				5C0DE22C25F7B81000491376 /* VideoComponents */,
 				5C0DE22925F7ABD100491376 /* YogaVision.mlmodel */,
 				5C7D6BBA25F758BB00982ED6 /* PoseRecognizer.swift */,
 				5CC705F225F74220000C74FE /* Assets.xcassets */,
