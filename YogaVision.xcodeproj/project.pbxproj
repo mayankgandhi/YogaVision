@@ -3,19 +3,43 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5C0DE22A25F7ABD100491376 /* YogaVision.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 5C0DE22925F7ABD100491376 /* YogaVision.mlmodel */; };
+		5C7D6BBB25F758BB00982ED6 /* PoseRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7D6BBA25F758BB00982ED6 /* PoseRecognizer.swift */; };
+		5C7D6BBE25F75A2600982ED6 /* VideoPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7D6BBC25F75A2600982ED6 /* VideoPicker.swift */; };
+		5C7D6BBF25F75A2600982ED6 /* VideoPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7D6BBD25F75A2600982ED6 /* VideoPlayer.swift */; };
+		5C8E05F525F762340004D9A7 /* AppDelegate+Injection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C8E05F425F762340004D9A7 /* AppDelegate+Injection.swift */; };
 		5CC705ED25F74219000C74FE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC705EC25F74219000C74FE /* AppDelegate.swift */; };
 		5CC705EF25F74219000C74FE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC705EE25F74219000C74FE /* SceneDelegate.swift */; };
 		5CC705F125F74219000C74FE /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC705F025F74219000C74FE /* ContentView.swift */; };
 		5CC705F325F74220000C74FE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5CC705F225F74220000C74FE /* Assets.xcassets */; };
 		5CC705F625F74220000C74FE /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5CC705F525F74220000C74FE /* Preview Assets.xcassets */; };
 		5CC705F925F74220000C74FE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5CC705F725F74220000C74FE /* LaunchScreen.storyboard */; };
+		CAB6C689067ECA10B745B7A9 /* Pods_YogaVision.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B1831C3C43F2170858D577DE /* Pods_YogaVision.framework */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		5C81FF4925F742F8005223FA /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		5C0DE22925F7ABD100491376 /* YogaVision.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = YogaVision.mlmodel; sourceTree = SOURCE_ROOT; };
+		5C7D6BBA25F758BB00982ED6 /* PoseRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoseRecognizer.swift; sourceTree = "<group>"; };
+		5C7D6BBC25F75A2600982ED6 /* VideoPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoPicker.swift; sourceTree = "<group>"; };
+		5C7D6BBD25F75A2600982ED6 /* VideoPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoPlayer.swift; sourceTree = "<group>"; };
+		5C8E05F425F762340004D9A7 /* AppDelegate+Injection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDelegate+Injection.swift"; sourceTree = "<group>"; };
 		5CC705E925F74219000C74FE /* YogaVision.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YogaVision.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5CC705EC25F74219000C74FE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5CC705EE25F74219000C74FE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -24,6 +48,9 @@
 		5CC705F525F74220000C74FE /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		5CC705F825F74220000C74FE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5CC705FA25F74220000C74FE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		94B41E38757494F8679AEEFF /* Pods-YogaVision.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YogaVision.debug.xcconfig"; path = "Target Support Files/Pods-YogaVision/Pods-YogaVision.debug.xcconfig"; sourceTree = "<group>"; };
+		B1831C3C43F2170858D577DE /* Pods_YogaVision.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YogaVision.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C803B9767BF85BEA73F7502A /* Pods-YogaVision.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YogaVision.release.xcconfig"; path = "Target Support Files/Pods-YogaVision/Pods-YogaVision.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,17 +58,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CAB6C689067ECA10B745B7A9 /* Pods_YogaVision.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0683F8225CE0B0A8B66DFA52 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B1831C3C43F2170858D577DE /* Pods_YogaVision.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		5CC705E025F74219000C74FE = {
 			isa = PBXGroup;
 			children = (
 				5CC705EB25F74219000C74FE /* YogaVision */,
 				5CC705EA25F74219000C74FE /* Products */,
+				B8F3692EE40641956E3CC318 /* Pods */,
+				0683F8225CE0B0A8B66DFA52 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -57,8 +95,13 @@
 			isa = PBXGroup;
 			children = (
 				5CC705EC25F74219000C74FE /* AppDelegate.swift */,
+				5C8E05F425F762340004D9A7 /* AppDelegate+Injection.swift */,
 				5CC705EE25F74219000C74FE /* SceneDelegate.swift */,
 				5CC705F025F74219000C74FE /* ContentView.swift */,
+				5C7D6BBC25F75A2600982ED6 /* VideoPicker.swift */,
+				5C7D6BBD25F75A2600982ED6 /* VideoPlayer.swift */,
+				5C0DE22925F7ABD100491376 /* YogaVision.mlmodel */,
+				5C7D6BBA25F758BB00982ED6 /* PoseRecognizer.swift */,
 				5CC705F225F74220000C74FE /* Assets.xcassets */,
 				5CC705F725F74220000C74FE /* LaunchScreen.storyboard */,
 				5CC705FA25F74220000C74FE /* Info.plist */,
@@ -75,6 +118,15 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		B8F3692EE40641956E3CC318 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				94B41E38757494F8679AEEFF /* Pods-YogaVision.debug.xcconfig */,
+				C803B9767BF85BEA73F7502A /* Pods-YogaVision.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -82,15 +134,20 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5CC705FD25F74220000C74FE /* Build configuration list for PBXNativeTarget "YogaVision" */;
 			buildPhases = (
+				61CD72D9BD8BF7AAF95969FD /* [CP] Check Pods Manifest.lock */,
 				5CC705E525F74219000C74FE /* Sources */,
 				5CC705E625F74219000C74FE /* Frameworks */,
 				5CC705E725F74219000C74FE /* Resources */,
+				5382EC7469E52B6E36DF619F /* [CP] Embed Pods Frameworks */,
+				5C81FF4925F742F8005223FA /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = YogaVision;
+			packageProductDependencies = (
+			);
 			productName = YogaVision;
 			productReference = 5CC705E925F74219000C74FE /* YogaVision.app */;
 			productType = "com.apple.product-type.application";
@@ -118,6 +175,8 @@
 				Base,
 			);
 			mainGroup = 5CC705E025F74219000C74FE;
+			packageReferences = (
+			);
 			productRefGroup = 5CC705EA25F74219000C74FE /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -140,6 +199,48 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		5382EC7469E52B6E36DF619F /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-YogaVision/Pods-YogaVision-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-YogaVision/Pods-YogaVision-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-YogaVision/Pods-YogaVision-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		61CD72D9BD8BF7AAF95969FD /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-YogaVision-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		5CC705E525F74219000C74FE /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -147,6 +248,11 @@
 			files = (
 				5CC705ED25F74219000C74FE /* AppDelegate.swift in Sources */,
 				5CC705EF25F74219000C74FE /* SceneDelegate.swift in Sources */,
+				5C0DE22A25F7ABD100491376 /* YogaVision.mlmodel in Sources */,
+				5C7D6BBF25F75A2600982ED6 /* VideoPlayer.swift in Sources */,
+				5C8E05F525F762340004D9A7 /* AppDelegate+Injection.swift in Sources */,
+				5C7D6BBB25F758BB00982ED6 /* PoseRecognizer.swift in Sources */,
+				5C7D6BBE25F75A2600982ED6 /* VideoPicker.swift in Sources */,
 				5CC705F125F74219000C74FE /* ContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -283,6 +389,7 @@
 		};
 		5CC705FE25F74220000C74FE /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 94B41E38757494F8679AEEFF /* Pods-YogaVision.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -304,6 +411,7 @@
 		};
 		5CC705FF25F74220000C74FE /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C803B9767BF85BEA73F7502A /* Pods-YogaVision.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
