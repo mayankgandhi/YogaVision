@@ -10,7 +10,8 @@ import Resolver
 
 struct ContentView: View {
 
-  @Injected var poseRecognizer: PoseRecognizer
+  @Injected var videoRecognizer: VideoRecognizer
+  @InjectedObject var mlInfo: MLInfo
   @State var showGallery: Bool = false
   @State var url: URL = URL(fileURLWithPath: "www.google.com")
 
@@ -32,31 +33,53 @@ struct ContentView: View {
     .pickerStyle(SegmentedPickerStyle())
   }
 
-  var videoRecognizer: some View {
+  var videoRecognizerView: some View {
     VStack {
       Text(url.absoluteString)
         .onChange(of: url, perform: { value in
-          poseRecognizer.recognizeYogaPose(from: url) { _ in print("done") }
+          videoRecognizer.recognizeYogaPose(from: url)
         })
     }
     .navigationBarItems(trailing: plusButton)
   }
 
-  var liveRecognizer: some View {
+  var liveRecognizerView: some View {
     VStack {
       LiveRecognizerViewController.LiveRecognizerViewRepresentable()
+        .edgesIgnoringSafeArea(.top)
     }
-    .navigationBarHidden(true)
-    .navigationBarTitle("")
   }
 
   var body: some View {
     NavigationView {
 //      segmentedPicker
 //      if pickerSelection == 1 {
-//        videoRecognizer
+//        videoRecognizerView
 //      } else {
-        liveRecognizer
+
+      ZStack(alignment: .bottomLeading) {
+        liveRecognizerView
+        HStack(alignment: .center, spacing: 20) {
+            VStack {
+              Image("Mountain Pose").resizable().scaledToFit().frame(width: 100, height: 100, alignment: .center)
+              Text("\(mlInfo.mountainPose.description)")
+                .font(.headline)
+            }
+            .padding()
+          Spacer()
+            VStack {
+              Image("Plank").resizable().scaledToFit().frame(width: 100, height: 100, alignment: .center)
+              Text("\(mlInfo.plank.description)")
+                .font(.headline)
+            }
+            .padding()
+          }
+        .background(Color.gray.opacity(0.5))
+        .cornerRadius(20)
+        .padding()
+      }
+      .navigationBarHidden(true)
+      .navigationBarTitle("")
 //      }
     }
     .fullScreenCover(isPresented: $showGallery) {

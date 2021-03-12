@@ -7,7 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5C0DE22A25F7ABD100491376 /* YogaVision.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 5C0DE22925F7ABD100491376 /* YogaVision.mlmodel */; };
+		5C4FB99225FB44E50011E42D /* MLInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4FB99125FB44E50011E42D /* MLInfo.swift */; };
+		5C4FB99425FB507D0011E42D /* YogaVision.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 5C4FB99325FB507D0011E42D /* YogaVision.mlmodel */; };
+		5C4FB99725FB595F0011E42D /* MountainPose.png in Resources */ = {isa = PBXBuildFile; fileRef = 5C4FB99525FB595F0011E42D /* MountainPose.png */; };
+		5C4FB99825FB595F0011E42D /* Plank.png in Resources */ = {isa = PBXBuildFile; fileRef = 5C4FB99625FB595F0011E42D /* Plank.png */; };
+		5C7C1FBD25FB168B003610CA /* VideoRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7C1FBC25FB168B003610CA /* VideoRecognizer.swift */; };
 		5C7D6BBB25F758BB00982ED6 /* PoseRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7D6BBA25F758BB00982ED6 /* PoseRecognizer.swift */; };
 		5C7D6BBE25F75A2600982ED6 /* VideoPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7D6BBC25F75A2600982ED6 /* VideoPicker.swift */; };
 		5C7D6BBF25F75A2600982ED6 /* VideoPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7D6BBD25F75A2600982ED6 /* VideoPlayer.swift */; };
@@ -39,7 +43,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		5C0DE22925F7ABD100491376 /* YogaVision.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = YogaVision.mlmodel; sourceTree = SOURCE_ROOT; };
+		5C4FB99125FB44E50011E42D /* MLInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLInfo.swift; sourceTree = "<group>"; };
+		5C4FB99325FB507D0011E42D /* YogaVision.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; name = YogaVision.mlmodel; path = YogaVision_CoreML/YogaVideoClassifier/YogaVision.mlmodel; sourceTree = SOURCE_ROOT; };
+		5C4FB99525FB595F0011E42D /* MountainPose.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MountainPose.png; sourceTree = "<group>"; };
+		5C4FB99625FB595F0011E42D /* Plank.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Plank.png; sourceTree = "<group>"; };
+		5C7C1FBC25FB168B003610CA /* VideoRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoRecognizer.swift; sourceTree = "<group>"; };
 		5C7D6BBA25F758BB00982ED6 /* PoseRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoseRecognizer.swift; sourceTree = "<group>"; };
 		5C7D6BBC25F75A2600982ED6 /* VideoPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoPicker.swift; sourceTree = "<group>"; };
 		5C7D6BBD25F75A2600982ED6 /* VideoPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoPlayer.swift; sourceTree = "<group>"; };
@@ -104,11 +112,19 @@
 			isa = PBXGroup;
 			children = (
 				5CC705F025F74219000C74FE /* ContentView.swift */,
+				5C4FB99125FB44E50011E42D /* MLInfo.swift */,
 				5C8CD17425F95A5800BC5FB9 /* LiveRecognizerViewController.swift */,
 				5C8CD17A25F95DAA00BC5FB9 /* CameraBufferViewController.swift */,
 				5C8CD17625F95A6F00BC5FB9 /* LiveRecognizer+Representable.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		5C4FB99925FB59640011E42D /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Assets;
 			sourceTree = "<group>";
 		};
 		5CC705E025F74219000C74FE = {
@@ -135,12 +151,16 @@
 				5C0DE22B25F7B80500491376 /* System */,
 				5C0DE22D25F7B81C00491376 /* Views */,
 				5C0DE22C25F7B81000491376 /* VideoComponents */,
-				5C0DE22925F7ABD100491376 /* YogaVision.mlmodel */,
 				5CCE240C25FA3ADC00AFD3C7 /* YogaImageClassifier.mlmodel */,
+				5C4FB99325FB507D0011E42D /* YogaVision.mlmodel */,
 				5C7D6BBA25F758BB00982ED6 /* PoseRecognizer.swift */,
+				5C7C1FBC25FB168B003610CA /* VideoRecognizer.swift */,
 				5CC705F225F74220000C74FE /* Assets.xcassets */,
+				5C4FB99525FB595F0011E42D /* MountainPose.png */,
+				5C4FB99625FB595F0011E42D /* Plank.png */,
 				5CC705F725F74220000C74FE /* LaunchScreen.storyboard */,
 				5CC705FA25F74220000C74FE /* Info.plist */,
+				5C4FB99925FB59640011E42D /* Assets */,
 				5CC705F425F74220000C74FE /* Preview Content */,
 			);
 			path = YogaVision;
@@ -228,6 +248,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				5CC705F925F74220000C74FE /* LaunchScreen.storyboard in Resources */,
+				5C4FB99725FB595F0011E42D /* MountainPose.png in Resources */,
+				5C4FB99825FB595F0011E42D /* Plank.png in Resources */,
 				5CC705F625F74220000C74FE /* Preview Assets.xcassets in Resources */,
 				5CC705F325F74220000C74FE /* Assets.xcassets in Resources */,
 			);
@@ -283,17 +305,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				5C8CD17525F95A5800BC5FB9 /* LiveRecognizerViewController.swift in Sources */,
+				5C4FB99425FB507D0011E42D /* YogaVision.mlmodel in Sources */,
 				5CC705ED25F74219000C74FE /* AppDelegate.swift in Sources */,
 				5CC705EF25F74219000C74FE /* SceneDelegate.swift in Sources */,
 				5C8CD17725F95A6F00BC5FB9 /* LiveRecognizer+Representable.swift in Sources */,
 				5C8CD17B25F95DAA00BC5FB9 /* CameraBufferViewController.swift in Sources */,
-				5C0DE22A25F7ABD100491376 /* YogaVision.mlmodel in Sources */,
 				5C7D6BBF25F75A2600982ED6 /* VideoPlayer.swift in Sources */,
 				5CCE240D25FA3ADC00AFD3C7 /* YogaImageClassifier.mlmodel in Sources */,
+				5C4FB99225FB44E50011E42D /* MLInfo.swift in Sources */,
 				5C8E05F525F762340004D9A7 /* AppDelegate+Injection.swift in Sources */,
 				5C7D6BBB25F758BB00982ED6 /* PoseRecognizer.swift in Sources */,
 				5C7D6BBE25F75A2600982ED6 /* VideoPicker.swift in Sources */,
 				5CC705F125F74219000C74FE /* ContentView.swift in Sources */,
+				5C7C1FBD25FB168B003610CA /* VideoRecognizer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

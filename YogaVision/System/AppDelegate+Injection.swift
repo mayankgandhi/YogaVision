@@ -13,6 +13,14 @@ extension Resolver: ResolverRegistering {
     register {
       PoseRecognizer()
     }
-    .scope(.shared)
+    .scope(.application)
+    register {
+      VideoRecognizer()
+    }
+    .scope(.application)
+    register {
+      MLInfo()
+    }
+    .scope(.application)
   }
 }

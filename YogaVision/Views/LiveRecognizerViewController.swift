@@ -8,14 +8,18 @@
 import UIKit
 import Vision
 import AVFoundation
+import Resolver
 
 class LiveRecognizerViewController: CameraBufferViewController {
+
+  @Injected var poseRecognizer: PoseRecognizer
+  @Injected var mlInfo: MLInfo
 
   private var detectionOverlay: CALayer! = nil
 
   // Vision parts
   private var requests = [VNDetectHumanBodyPoseRequest]()
-
+  private var bodyPoseObservations = [VNHumanBodyPoseObservation]()
   private var imageRequest = [VNRequest]()
 
   override func setupAVCapture() {
@@ -31,7 +35,6 @@ class LiveRecognizerViewController: CameraBufferViewController {
 
   func setupPoseVision() {
     let visionRequest = VNDetectHumanBodyPoseRequest { [self] (vnRequest, error) in
-      print("Pose Request Executed")
       if let error = error {
         fatalError(error.localizedDescription)
       }
@@ -69,9 +72,11 @@ class LiveRecognizerViewController: CameraBufferViewController {
       guard let objectObservation = observation as? VNHumanBodyPoseObservation else {
         continue
       }
+      bodyPoseObservations.append(objectObservation)
+      makePrediction()
       // Select only the label with the highest confidence.
       let bodyPoints = processObservation(objectObservation)
-      print(bodyPoints)
+      //      print(bodyPoints)
       bodyPoints.forEach { (point) in
         let shapeLayer = self.createBodyPoint(point)
         detectionOverlay.addSublayer(shapeLayer)
@@ -79,6 +84,21 @@ class LiveRecognizerViewController: CameraBufferViewController {
     }
     self.updateLayerGeometry()
     CATransaction.commit()
+  }
+
+  func makePrediction() {
+    guard bodyPoseObservations.count == poseRecognizer.predictionWindow else { return }
+    let thirtyFramesPose: [VNHumanBodyPoseObservation] = bodyPoseObservations.prefix(poseRecognizer.predictionWindow).map { $0 }
+    bodyPoseObservations.removeFirst(poseRecognizer.predictionWindow)
+    if let prediction = poseRecognizer.makePrediction(posesWindow: thirtyFramesPose) {
+      prediction.featureNames.forEach { print("\($0) - \(prediction.featureValue(for: $0))") }
+      guard let probabilities = prediction.featureValue(for: "labelProbabilities") else { return }
+      DispatchQueue.main.async { [self] in
+        mlInfo.mountainPose = probabilities.dictionaryValue["MountainPose"]!.stringValue
+        mlInfo.plank = probabilities.dictionaryValue["Plank"]!.stringValue
+
+      }
+    }
   }
 
   func drawImageRequestResults(_ results: [Any]) {
@@ -114,7 +134,7 @@ class LiveRecognizerViewController: CameraBufferViewController {
     }
 
     // Torso point keys in a clockwise ordering.
-    let jointKeys: [VNHumanBodyPoseObservation.JointName] = [ .leftAnkle, .leftEar, .leftElbow, .leftEye, .leftHip, .leftKnee, .leftShoulder, .leftWrist, .neck, .nose, .rightAnkle, .rightEar, .rightElbow, .rightEye, .rightHip, .rightKnee, .rightShoulder, .rightWrist]
+    let jointKeys: [VNHumanBodyPoseObservation.JointName] = [ .leftAnkle,  .leftElbow,  .leftHip, .leftKnee, .leftShoulder, .leftWrist, .neck, .nose, .rightAnkle,  .rightElbow,  .rightHip, .rightKnee, .rightShoulder, .rightWrist]
 
     // Retrieve the CGPoints containing the normalized X and Y coordinates.
     let imagePoints: [CGPoint] = jointKeys.compactMap {
@@ -137,7 +157,7 @@ class LiveRecognizerViewController: CameraBufferViewController {
     let sequenceHandler = VNSequenceRequestHandler()
     do {
       try sequenceHandler.perform(self.requests, on: pixelBuffer, orientation: exifOrientation)
-//      try sequenceHandler.perform(self.imageRequest, on: pixelBuffer, orientation: exifOrientation)
+      //      try sequenceHandler.perform(self.imageRequest, on: pixelBuffer, orientation: exifOrientation)
     } catch {
       print(error)
     }
