@@ -9,6 +9,6 @@ import Foundation
 import SwiftUI
 
 class MLInfo: ObservableObject {
-  @Published var mountainPose: String = ""
-  @Published var plank: String = ""
+    @Published var mountainPose: Float = 0.0
+    @Published var plank: Float = 0.0
 }

@@ -9,15 +9,13 @@ import Foundation
 import SwiftUI
 
 extension LiveRecognizerViewController {
+    struct LiveRecognizerViewRepresentable: UIViewControllerRepresentable {
+        typealias UIViewControllerType = LiveRecognizerViewController
 
-  struct LiveRecognizerViewRepresentable: UIViewControllerRepresentable {
-    typealias UIViewControllerType = LiveRecognizerViewController
+        func makeUIViewController(context _: Context) -> LiveRecognizerViewController {
+            LiveRecognizerViewController()
+        }
 
-    func makeUIViewController(context: Context) -> LiveRecognizerViewController {
-      LiveRecognizerViewController()
+        func updateUIViewController(_: LiveRecognizerViewController, context _: Context) {}
     }
-
-    func updateUIViewController(_ uiViewController: LiveRecognizerViewController, context: Context) { }
-  }
-
 }

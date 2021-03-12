@@ -9,18 +9,18 @@ import Foundation
 import Resolver
 
 extension Resolver: ResolverRegistering {
-  public static func registerAllServices() {
-    register {
-      PoseRecognizer()
+    public static func registerAllServices() {
+        register {
+            LiveRecognizer()
+        }
+        .scope(.application)
+        register {
+            VideoRecognizer()
+        }
+        .scope(.application)
+        register {
+            MLInfo()
+        }
+        .scope(.application)
     }
-    .scope(.application)
-    register {
-      VideoRecognizer()
-    }
-    .scope(.application)
-    register {
-      MLInfo()
-    }
-    .scope(.application)
-  }
 }

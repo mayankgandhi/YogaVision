@@ -62,5 +62,4 @@ class VideoPlayerView: UIView, ObservableObject {
         player.play()
         player.volume = 0
     } // setup
-    
 }
