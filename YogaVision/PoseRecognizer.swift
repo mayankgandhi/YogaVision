@@ -38,7 +38,7 @@ final class PoseRecognizer {
     do {
       let videoProcessor = VNVideoProcessor(url: assetURL)
       try videoProcessor.addRequest(visionRequest, processingOptions: VNVideoProcessor.RequestProcessingOptions())
-      try videoProcessor.analyze(CMTimeRange(start: .zero, duration: asset.duration))
+      try videoProcessor.analyze(CMTimeRange(start: .zero, duration: CMTime(seconds: 3, preferredTimescale: .min)))
       completion(allPoses)
     } catch {
       fatalError(error.localizedDescription)
@@ -61,4 +61,4 @@ final class PoseRecognizer {
   }
 
 }
-/Users/mayankgandhi/XcodeProjects/YogaVision/Pods
+

@@ -11,6 +11,9 @@
 		5C7D6BBB25F758BB00982ED6 /* PoseRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7D6BBA25F758BB00982ED6 /* PoseRecognizer.swift */; };
 		5C7D6BBE25F75A2600982ED6 /* VideoPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7D6BBC25F75A2600982ED6 /* VideoPicker.swift */; };
 		5C7D6BBF25F75A2600982ED6 /* VideoPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7D6BBD25F75A2600982ED6 /* VideoPlayer.swift */; };
+		5C8CD17525F95A5800BC5FB9 /* LiveRecognizerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C8CD17425F95A5800BC5FB9 /* LiveRecognizerViewController.swift */; };
+		5C8CD17725F95A6F00BC5FB9 /* LiveRecognizer+Representable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C8CD17625F95A6F00BC5FB9 /* LiveRecognizer+Representable.swift */; };
+		5C8CD17B25F95DAA00BC5FB9 /* CameraBufferViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C8CD17A25F95DAA00BC5FB9 /* CameraBufferViewController.swift */; };
 		5C8E05F525F762340004D9A7 /* AppDelegate+Injection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C8E05F425F762340004D9A7 /* AppDelegate+Injection.swift */; };
 		5CC705ED25F74219000C74FE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC705EC25F74219000C74FE /* AppDelegate.swift */; };
 		5CC705EF25F74219000C74FE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC705EE25F74219000C74FE /* SceneDelegate.swift */; };
@@ -18,6 +21,7 @@
 		5CC705F325F74220000C74FE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5CC705F225F74220000C74FE /* Assets.xcassets */; };
 		5CC705F625F74220000C74FE /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5CC705F525F74220000C74FE /* Preview Assets.xcassets */; };
 		5CC705F925F74220000C74FE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5CC705F725F74220000C74FE /* LaunchScreen.storyboard */; };
+		5CCE240D25FA3ADC00AFD3C7 /* YogaImageClassifier.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 5CCE240C25FA3ADC00AFD3C7 /* YogaImageClassifier.mlmodel */; };
 		CAB6C689067ECA10B745B7A9 /* Pods_YogaVision.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B1831C3C43F2170858D577DE /* Pods_YogaVision.framework */; };
 /* End PBXBuildFile section */
 
@@ -39,6 +43,9 @@
 		5C7D6BBA25F758BB00982ED6 /* PoseRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoseRecognizer.swift; sourceTree = "<group>"; };
 		5C7D6BBC25F75A2600982ED6 /* VideoPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoPicker.swift; sourceTree = "<group>"; };
 		5C7D6BBD25F75A2600982ED6 /* VideoPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoPlayer.swift; sourceTree = "<group>"; };
+		5C8CD17425F95A5800BC5FB9 /* LiveRecognizerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveRecognizerViewController.swift; sourceTree = "<group>"; };
+		5C8CD17625F95A6F00BC5FB9 /* LiveRecognizer+Representable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LiveRecognizer+Representable.swift"; sourceTree = "<group>"; };
+		5C8CD17A25F95DAA00BC5FB9 /* CameraBufferViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraBufferViewController.swift; sourceTree = "<group>"; };
 		5C8E05F425F762340004D9A7 /* AppDelegate+Injection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDelegate+Injection.swift"; sourceTree = "<group>"; };
 		5CC705E925F74219000C74FE /* YogaVision.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YogaVision.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5CC705EC25F74219000C74FE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -48,6 +55,7 @@
 		5CC705F525F74220000C74FE /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		5CC705F825F74220000C74FE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5CC705FA25F74220000C74FE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5CCE240C25FA3ADC00AFD3C7 /* YogaImageClassifier.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = YogaImageClassifier.mlmodel; sourceTree = "<group>"; };
 		94B41E38757494F8679AEEFF /* Pods-YogaVision.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YogaVision.debug.xcconfig"; path = "Target Support Files/Pods-YogaVision/Pods-YogaVision.debug.xcconfig"; sourceTree = "<group>"; };
 		B1831C3C43F2170858D577DE /* Pods_YogaVision.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YogaVision.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C803B9767BF85BEA73F7502A /* Pods-YogaVision.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YogaVision.release.xcconfig"; path = "Target Support Files/Pods-YogaVision/Pods-YogaVision.release.xcconfig"; sourceTree = "<group>"; };
@@ -96,6 +104,9 @@
 			isa = PBXGroup;
 			children = (
 				5CC705F025F74219000C74FE /* ContentView.swift */,
+				5C8CD17425F95A5800BC5FB9 /* LiveRecognizerViewController.swift */,
+				5C8CD17A25F95DAA00BC5FB9 /* CameraBufferViewController.swift */,
+				5C8CD17625F95A6F00BC5FB9 /* LiveRecognizer+Representable.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -125,6 +136,7 @@
 				5C0DE22D25F7B81C00491376 /* Views */,
 				5C0DE22C25F7B81000491376 /* VideoComponents */,
 				5C0DE22925F7ABD100491376 /* YogaVision.mlmodel */,
+				5CCE240C25FA3ADC00AFD3C7 /* YogaImageClassifier.mlmodel */,
 				5C7D6BBA25F758BB00982ED6 /* PoseRecognizer.swift */,
 				5CC705F225F74220000C74FE /* Assets.xcassets */,
 				5CC705F725F74220000C74FE /* LaunchScreen.storyboard */,
@@ -270,10 +282,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5C8CD17525F95A5800BC5FB9 /* LiveRecognizerViewController.swift in Sources */,
 				5CC705ED25F74219000C74FE /* AppDelegate.swift in Sources */,
 				5CC705EF25F74219000C74FE /* SceneDelegate.swift in Sources */,
+				5C8CD17725F95A6F00BC5FB9 /* LiveRecognizer+Representable.swift in Sources */,
+				5C8CD17B25F95DAA00BC5FB9 /* CameraBufferViewController.swift in Sources */,
 				5C0DE22A25F7ABD100491376 /* YogaVision.mlmodel in Sources */,
 				5C7D6BBF25F75A2600982ED6 /* VideoPlayer.swift in Sources */,
+				5CCE240D25FA3ADC00AFD3C7 /* YogaImageClassifier.mlmodel in Sources */,
 				5C8E05F525F762340004D9A7 /* AppDelegate+Injection.swift in Sources */,
 				5C7D6BBB25F758BB00982ED6 /* PoseRecognizer.swift in Sources */,
 				5C7D6BBE25F75A2600982ED6 /* VideoPicker.swift in Sources */,
