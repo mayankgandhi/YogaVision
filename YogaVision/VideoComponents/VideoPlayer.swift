@@ -12,15 +12,13 @@ import Foundation
 import SwiftUI
 
 struct VideoPlayer: UIViewRepresentable {
-    @State var videoURL: URL
+    let videoURL: URL
 
     func makeUIView(context _: Context) -> VideoPlayerView {
         return VideoPlayerView(frame: .zero, url: videoURL)
     }
 
-    func updateUIView(_: VideoPlayerView, context _: Context) {
-        //
-    }
+    func updateUIView(_: VideoPlayerView, context _: Context) {}
 }
 
 class VideoPlayerView: UIView, ObservableObject {

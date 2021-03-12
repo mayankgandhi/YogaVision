@@ -10,17 +10,11 @@ import Resolver
 
 extension Resolver: ResolverRegistering {
     public static func registerAllServices() {
-        register {
-            LiveRecognizer()
-        }
-        .scope(.application)
-        register {
-            VideoRecognizer()
-        }
-        .scope(.application)
-        register {
-            MLInfo()
-        }
-        .scope(.application)
+        register { LiveRecognizer() }
+            .scope(.shared)
+        register { VideoRecognizer() }
+            .scope(.shared)
+        register { MLInfo() }
+            .scope(.application)
     }
 }

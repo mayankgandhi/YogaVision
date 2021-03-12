@@ -25,14 +25,14 @@ final class LiveRecognizer: PoseRecognizer {
     }
 
     func processObservation(_ observation: VNHumanBodyPoseObservation, normalizedFor viewBounds: CGRect) -> [CGPoint] {
-        // Retrieve all torso points.
+        // Retrieve all points.
         guard let bodyPoints =
             try? observation.recognizedPoints(.all)
         else {
             return []
         }
 
-        // Torso point keys in a clockwise ordering.
+        // JointKeys that need to be drawn on the screen
         let jointKeys: [VNHumanBodyPoseObservation.JointName] = [.leftAnkle, .leftElbow, .leftHip, .leftKnee, .leftShoulder, .leftWrist, .neck, .nose, .rightAnkle, .rightElbow, .rightHip, .rightKnee, .rightShoulder, .rightWrist]
 
         // Retrieve the CGPoints containing the normalized X and Y coordinates.
@@ -53,7 +53,6 @@ final class LiveRecognizer: PoseRecognizer {
         let sequenceHandler = VNSequenceRequestHandler()
         do {
             try sequenceHandler.perform(requests, on: pixelBuffer, orientation: exifOrientation)
-            //      try sequenceHandler.perform(self.imageRequest, on: pixelBuffer, orientation: exifOrientation)
         } catch {
             print(error)
         }
