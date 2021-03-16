@@ -10,6 +10,7 @@ import Foundation
 import Vision
 
 final class VideoRecognizer: PoseRecognizer {
+
     func recognizeYogaPose(from url: URL) {
         grabPoses(from: url) { [self] poses in
             let poses = poses.prefix(predictionWindow).map { x in x }
@@ -40,4 +41,5 @@ final class VideoRecognizer: PoseRecognizer {
             fatalError(error.localizedDescription)
         }
     }
+
 }

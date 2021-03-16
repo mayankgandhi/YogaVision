@@ -25,6 +25,7 @@
 		5CC705F625F74220000C74FE /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5CC705F525F74220000C74FE /* Preview Assets.xcassets */; };
 		5CC705F925F74220000C74FE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5CC705F725F74220000C74FE /* LaunchScreen.storyboard */; };
 		5CCE240D25FA3ADC00AFD3C7 /* YogaImageClassifier.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 5CCE240C25FA3ADC00AFD3C7 /* YogaImageClassifier.mlmodel */; };
+		5CF6415325FE58040089573A /* TabSwitcherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF6415225FE58040089573A /* TabSwitcherView.swift */; };
 		CAB6C689067ECA10B745B7A9 /* Pods_YogaVision.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B1831C3C43F2170858D577DE /* Pods_YogaVision.framework */; };
 /* End PBXBuildFile section */
 
@@ -62,6 +63,7 @@
 		5CC705F825F74220000C74FE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5CC705FA25F74220000C74FE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5CCE240C25FA3ADC00AFD3C7 /* YogaImageClassifier.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = YogaImageClassifier.mlmodel; sourceTree = "<group>"; };
+		5CF6415225FE58040089573A /* TabSwitcherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabSwitcherView.swift; sourceTree = "<group>"; };
 		94B41E38757494F8679AEEFF /* Pods-YogaVision.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YogaVision.debug.xcconfig"; path = "Target Support Files/Pods-YogaVision/Pods-YogaVision.debug.xcconfig"; sourceTree = "<group>"; };
 		B1831C3C43F2170858D577DE /* Pods_YogaVision.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YogaVision.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C803B9767BF85BEA73F7502A /* Pods-YogaVision.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YogaVision.release.xcconfig"; path = "Target Support Files/Pods-YogaVision/Pods-YogaVision.release.xcconfig"; sourceTree = "<group>"; };
@@ -114,6 +116,7 @@
 				5C8CD17425F95A5800BC5FB9 /* LiveRecognizerViewController.swift */,
 				5C8CD17A25F95DAA00BC5FB9 /* CameraBufferViewController.swift */,
 				5C8CD17625F95A6F00BC5FB9 /* LiveRecognizer+Representable.swift */,
+				5CF6415225FE58040089573A /* TabSwitcherView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -318,6 +321,7 @@
 				5C4FB99225FB44E50011E42D /* MLInfo.swift in Sources */,
 				5CBAEA2125FBCFE20018D8E2 /* YogaVision.mlmodel in Sources */,
 				5C8E05F525F762340004D9A7 /* AppDelegate+Injection.swift in Sources */,
+				5CF6415325FE58040089573A /* TabSwitcherView.swift in Sources */,
 				5C7D6BBB25F758BB00982ED6 /* PoseRecognizer.swift in Sources */,
 				5C7D6BBE25F75A2600982ED6 /* VideoPicker.swift in Sources */,
 				5CC705F125F74219000C74FE /* ContentView.swift in Sources */,

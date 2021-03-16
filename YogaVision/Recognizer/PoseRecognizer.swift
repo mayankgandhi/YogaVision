@@ -10,6 +10,7 @@ import Foundation
 import Vision
 
 class PoseRecognizer {
+    /// Prediction Window parameter for the Model Input
     let predictionWindow = 30
     let model = try? YogaVision(configuration: MLModelConfiguration())
 

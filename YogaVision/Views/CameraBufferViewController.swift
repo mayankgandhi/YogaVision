@@ -11,6 +11,7 @@ import SwiftUI
 import UIKit
 
 class CameraBufferViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate {
+
     var bufferSize: CGSize = .zero
     var rootLayer: CALayer!
 

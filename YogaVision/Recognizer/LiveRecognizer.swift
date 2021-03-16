@@ -10,84 +10,78 @@ import UIKit
 import Vision
 
 final class LiveRecognizer: PoseRecognizer {
-    private var requests = [VNDetectHumanBodyPoseRequest]()
 
-    func setupPoseVision(completion: @escaping ([Any]) -> Void) {
-        let visionRequest = VNDetectHumanBodyPoseRequest { [self] vnRequest, error in
-            if let error = error {
-                fatalError(error.localizedDescription)
-            }
-            if let poseObservations = vnRequest.results {
-                completion(poseObservations)
-            }
-        }
-        requests = [visionRequest]
+  // Instance Properties
+  private var requests = [VNDetectHumanBodyPoseRequest]()
+  private let sequenceHandler = VNSequenceRequestHandler()
+  private var bodyPoseObservations = [VNHumanBodyPoseObservation]()
+
+  // Setup Vision Request to perform on CVPixelBuffer
+  func setupPoseVision(completion: @escaping (VNHumanBodyPoseObservation?)->Void ) {
+    let visionRequest = VNDetectHumanBodyPoseRequest { [self] vnRequest, error in
+      if let error = error {
+        fatalError(error.localizedDescription)
+      }
+      if let poseObservations = vnRequest.results {
+        completion(transformBodyPoseObservation(from: poseObservations))
+      }
     }
+    requests = [visionRequest]
+  }
 
-    func processObservation(_ observation: VNHumanBodyPoseObservation, normalizedFor viewBounds: CGRect) -> [CGPoint] {
-        // Retrieve all points.
-        guard let bodyPoints =
-            try? observation.recognizedPoints(.all)
-        else {
-            return []
-        }
-
-        // JointKeys that need to be drawn on the screen
-        let jointKeys: [VNHumanBodyPoseObservation.JointName] = [.leftAnkle, .leftElbow, .leftHip, .leftKnee, .leftShoulder, .leftWrist, .neck, .nose, .rightAnkle, .rightElbow, .rightHip, .rightKnee, .rightShoulder, .rightWrist]
-
-        // Retrieve the CGPoints containing the normalized X and Y coordinates.
-        let imagePoints: [CGPoint] = jointKeys.compactMap {
-            guard let point = bodyPoints[$0], point.confidence > 0 else { return nil }
-
-            // Translate the point from normalized-coordinates to image coordinates.
-            return VNImagePointForNormalizedPoint(point.location,
-                                                  Int(viewBounds.width),
-                                                  Int(viewBounds.height))
-        }
-        // Draw the points onscreen.
-        return imagePoints
+  func analyzeCurrentBuffer(pixelBuffer: CVPixelBuffer) {
+    /// Get the CGImageOrientation reference to the UIDeviceOrientation
+    /// used to perform Vision Request
+    let exifOrientation = exifOrientationFromDeviceOrientation()
+    do {
+      try sequenceHandler.perform(requests, on: pixelBuffer, orientation: exifOrientation)
+    } catch {
+      print(error)
     }
+  }
 
-    func analyzeCurrentBuffer(pixelBuffer: CVPixelBuffer) {
-        let exifOrientation = exifOrientationFromDeviceOrientation()
-        let sequenceHandler = VNSequenceRequestHandler()
-        do {
-            try sequenceHandler.perform(requests, on: pixelBuffer, orientation: exifOrientation)
-        } catch {
-            print(error)
-        }
+  func transformBodyPoseObservation(from results: [Any]) -> VNHumanBodyPoseObservation? {
+    for observation in results where observation is VNHumanBodyPoseObservation {
+      guard let bodyPoseObservation = observation as? VNHumanBodyPoseObservation else {
+        continue
+      }
+      // Get the most prominent VNHumanBodyPoseObservation
+      bodyPoseObservations.append(bodyPoseObservation)
+      return bodyPoseObservation
     }
+    return nil
+  }
 
-    func performPrediction(with bodyPoseObservations: [VNHumanBodyPoseObservation],
-                           completion: ((Float, Float)) -> Void)
-    {
-        guard bodyPoseObservations.count == predictionWindow else { return }
-        let predictionWindowPoses: [VNHumanBodyPoseObservation] = bodyPoseObservations.prefix(predictionWindow).map { $0 }
+  func performPrediction(completion: ((Float, Float)) -> Void) {
+    /// Check if we have enough VNBodyPoseObservation for the MLModelInput
+    guard bodyPoseObservations.count == predictionWindow else { return }
+    let predictionWindowPoses: [VNHumanBodyPoseObservation] = bodyPoseObservations.prefix(predictionWindow).map { $0 }
 
-        guard let prediction = makePrediction(posesWindow: predictionWindowPoses),
-              let probabilities = prediction.featureValue(for: "labelProbabilities") else { return }
+    guard let prediction = makePrediction(posesWindow: predictionWindowPoses),
+          let probabilities = prediction.featureValue(for: "labelProbabilities") else { return }
 
-        let mountainPoseProbability = probabilities.dictionaryValue["MountainPose"]!.floatValue * 100
-        let plankPoseProbability = probabilities.dictionaryValue["Plank"]!.floatValue * 100
-        completion((mountainPoseProbability, plankPoseProbability))
+    /// Calculate Probability Percentages that need to be drawn on screen
+    let mountainPoseProbability = probabilities.dictionaryValue["MountainPose"]!.floatValue * 100
+    let plankPoseProbability = probabilities.dictionaryValue["Plank"]!.floatValue * 100
+    completion((mountainPoseProbability, plankPoseProbability))
+  }
+
+  private func exifOrientationFromDeviceOrientation() -> CGImagePropertyOrientation {
+    let curDeviceOrientation = UIDevice.current.orientation
+    let exifOrientation: CGImagePropertyOrientation
+
+    switch curDeviceOrientation {
+    case UIDeviceOrientation.portraitUpsideDown: // Device oriented vertically, home button on the top
+      exifOrientation = .left
+    case UIDeviceOrientation.landscapeLeft: // Device oriented horizontally, home button on the right
+      exifOrientation = .upMirrored
+    case UIDeviceOrientation.landscapeRight: // Device oriented horizontally, home button on the left
+      exifOrientation = .down
+    case UIDeviceOrientation.portrait: // Device oriented vertically, home button on the bottom
+      exifOrientation = .up
+    default:
+      exifOrientation = .up
     }
-
-    private func exifOrientationFromDeviceOrientation() -> CGImagePropertyOrientation {
-        let curDeviceOrientation = UIDevice.current.orientation
-        let exifOrientation: CGImagePropertyOrientation
-
-        switch curDeviceOrientation {
-        case UIDeviceOrientation.portraitUpsideDown: // Device oriented vertically, home button on the top
-            exifOrientation = .left
-        case UIDeviceOrientation.landscapeLeft: // Device oriented horizontally, home button on the right
-            exifOrientation = .upMirrored
-        case UIDeviceOrientation.landscapeRight: // Device oriented horizontally, home button on the left
-            exifOrientation = .down
-        case UIDeviceOrientation.portrait: // Device oriented vertically, home button on the bottom
-            exifOrientation = .up
-        default:
-            exifOrientation = .up
-        }
-        return exifOrientation
-    }
+    return exifOrientation
+  }
 }
