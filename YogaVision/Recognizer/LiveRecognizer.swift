@@ -27,7 +27,7 @@ final class LiveRecognizer: PoseRecognizer {
       }
     }
     requests = [visionRequest]
-  }
+  } 
 
   func analyzeCurrentBuffer(pixelBuffer: CVPixelBuffer) {
     /// Get the CGImageOrientation reference to the UIDeviceOrientation

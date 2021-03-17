@@ -11,7 +11,10 @@ import UIKit
 import Vision
 
 class LiveRecognizerViewController: CameraBufferViewController {
+
+  /// LiveRecognizer dependency performs Vision and ML requests
   @Injected var livePoseRecognizer: LiveRecognizer
+  /// View State Observable Object
   @Injected var mlInfo: MLInfo
 
   private var detectionOverlay: CALayer!
@@ -54,7 +57,8 @@ class LiveRecognizerViewController: CameraBufferViewController {
     CATransaction.commit()
   }
 
-  override func captureOutput(_: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from _: AVCaptureConnection) {
+  override func captureOutput(_: AVCaptureOutput,
+                              didOutput sampleBuffer: CMSampleBuffer, from _: AVCaptureConnection) {
     guard let pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else {
       return
     }
@@ -113,7 +117,7 @@ class LiveRecognizerViewController: CameraBufferViewController {
     CATransaction.commit()
   }
 
-  func createBodyPoint(_ point: CGPoint) -> CALayer {
+  private func createBodyPoint(_ point: CGPoint) -> CALayer {
     let shapeLayer = CALayer()
     shapeLayer.bounds = CGRect(x: point.x, y: point.y, width: 10, height: 10)
     shapeLayer.position = CGPoint(x: point.x, y: point.y)
