@@ -6,84 +6,97 @@
 //
 
 import Foundation
+import Resolver
 import UIKit
 import Vision
 
 final class LiveRecognizer: PoseRecognizer {
+    @Injected var mlInfo: MLInfo
 
-  // Instance Properties
-  private var requests = [VNDetectHumanBodyPoseRequest]()
-  private let sequenceHandler = VNSequenceRequestHandler()
-  private var bodyPoseObservations = [VNHumanBodyPoseObservation]()
+    // Instance Properties
+    private var requests = [VNDetectHumanBodyPoseRequest]()
+    private let sequenceHandler = VNSequenceRequestHandler()
+    private var bodyPoseObservations = [VNHumanBodyPoseObservation]()
 
-  // Setup Vision Request to perform on CVPixelBuffer
-  func setupPoseVision(completion: @escaping (VNHumanBodyPoseObservation?)->Void ) {
-    let visionRequest = VNDetectHumanBodyPoseRequest { [self] vnRequest, error in
-      if let error = error {
-        fatalError(error.localizedDescription)
-      }
-      if let poseObservations = vnRequest.results {
-        let bodyPoseObservations = transformBodyPoseObservation(from: poseObservations)
-        completion(bodyPoseObservations)
-      }
+    // Setup Vision Request to perform on CVPixelBuffer
+    func setupPoseVision(completion: @escaping (VNHumanBodyPoseObservation?) -> Void) {
+        let visionRequest = VNDetectHumanBodyPoseRequest { [self] vnRequest, error in
+            if let error = error {
+                fatalError(error.localizedDescription)
+            }
+            if let poseObservations = vnRequest.results {
+                let bodyPoseObservations = transformBodyPoseObservation(from: poseObservations)
+                completion(bodyPoseObservations)
+            } else {
+                completion(nil)
+            }
+        }
+        requests = [visionRequest]
     }
-    requests = [visionRequest]
-  }
 
-  func analyzeCurrentBuffer(pixelBuffer: CVPixelBuffer, completion: ()->Void ) {
-    /// Get the CGImageOrientation reference to the UIDeviceOrientation
-    /// used to perform Vision Request
-    let exifOrientation = exifOrientationFromDeviceOrientation()
-    do {
-      try sequenceHandler.perform(requests, on: pixelBuffer, orientation: exifOrientation)
-      completion()
-    } catch {
-      print(error)
+    func analyzeCurrentBuffer(pixelBuffer: CVPixelBuffer, completion: () -> Void) {
+        /// Get the CGImageOrientation reference to the UIDeviceOrientation
+        /// used to perform Vision Request
+        let exifOrientation = exifOrientationFromDeviceOrientation()
+        do {
+            try sequenceHandler.perform(requests, on: pixelBuffer, orientation: exifOrientation)
+            completion()
+        } catch {
+            print(error)
+        }
     }
-  }
 
-  func transformBodyPoseObservation(from results: [Any]) -> VNHumanBodyPoseObservation? {
-    for observation in results where observation is VNHumanBodyPoseObservation {
-      guard let bodyPoseObservation = observation as? VNHumanBodyPoseObservation else {
-        continue
-      }
-      // Get the most prominent VNHumanBodyPoseObservation
-      bodyPoseObservations.append(bodyPoseObservation)
-      return bodyPoseObservation
+    func transformBodyPoseObservation(from results: [Any]) -> VNHumanBodyPoseObservation? {
+        for observation in results where observation is VNHumanBodyPoseObservation {
+            guard let bodyPoseObservation = observation as? VNHumanBodyPoseObservation else {
+                continue
+            }
+            // Get the most prominent VNHumanBodyPoseObservation
+            bodyPoseObservations.append(bodyPoseObservation)
+            DispatchQueue.main.async { [self] in
+                if bodyPoseObservations.count < predictionWindow {
+                    mlInfo.progress += Float(100 / predictionWindow)
+                } else {
+                    mlInfo.progress = 0
+                }
+            }
+            return bodyPoseObservation
+        }
+        return nil
     }
-    return nil
-  }
 
-  func performPrediction(completion: ((Float, Float)) -> Void) {
-    /// Check if we have enough VNBodyPoseObservation for the MLModelInput
-    guard bodyPoseObservations.count == predictionWindow else { return }
-    let predictionWindowPoses: [VNHumanBodyPoseObservation] = bodyPoseObservations.prefix(predictionWindow).map { $0 }
+    func performPrediction(completion: ((Float, Float)) -> Void) {
+        /// Check if we have enough VNBodyPoseObservation for the MLModelInput
+        guard bodyPoseObservations.count == predictionWindow else { return }
 
-    guard let prediction = makePrediction(posesWindow: predictionWindowPoses),
-          let probabilities = prediction.featureValue(for: "labelProbabilities") else { return }
+        let predictionWindowPoses: [VNHumanBodyPoseObservation] = bodyPoseObservations.prefix(predictionWindow).map { $0 }
+        bodyPoseObservations.removeFirst(predictionWindow)
 
-    /// Calculate Probability Percentages that need to be drawn on screen
-    let mountainPoseProbability = probabilities.dictionaryValue["MountainPose"]!.floatValue * 100
-    let plankPoseProbability = probabilities.dictionaryValue["Plank"]!.floatValue * 100
-    completion((mountainPoseProbability, plankPoseProbability))
-  }
+        guard let prediction = makePrediction(posesWindow: predictionWindowPoses),
+              let probabilities = prediction.featureValue(for: "labelProbabilities") else { return }
 
-  private func exifOrientationFromDeviceOrientation() -> CGImagePropertyOrientation {
-    let curDeviceOrientation = UIDevice.current.orientation
-    let exifOrientation: CGImagePropertyOrientation
-
-    switch curDeviceOrientation {
-    case UIDeviceOrientation.portraitUpsideDown: // Device oriented vertically, home button on the top
-      exifOrientation = .left
-    case UIDeviceOrientation.landscapeLeft: // Device oriented horizontally, home button on the right
-      exifOrientation = .upMirrored
-    case UIDeviceOrientation.landscapeRight: // Device oriented horizontally, home button on the left
-      exifOrientation = .down
-    case UIDeviceOrientation.portrait: // Device oriented vertically, home button on the bottom
-      exifOrientation = .up
-    default:
-      exifOrientation = .up
+        /// Calculate Probability Percentages that need to be drawn on screen
+        let mountainPoseProbability = probabilities.dictionaryValue["MountainPose"]!.floatValue * 100
+        let plankPoseProbability = probabilities.dictionaryValue["Plank"]!.floatValue * 100
+        completion((mountainPoseProbability, plankPoseProbability))
     }
-    return exifOrientation
-  }
+
+    private func exifOrientationFromDeviceOrientation() -> CGImagePropertyOrientation {
+        let curDeviceOrientation = UIDevice.current.orientation
+        let exifOrientation: CGImagePropertyOrientation
+
+        switch curDeviceOrientation {
+        case UIDeviceOrientation.portraitUpsideDown: // Device oriented vertically, home button on the top
+            exifOrientation = .left
+        case UIDeviceOrientation.landscapeLeft: // Device oriented horizontally, home button on the right
+            exifOrientation = .upMirrored
+        case UIDeviceOrientation.landscapeRight: // Device oriented horizontally, home button on the left
+            exifOrientation = .down
+        case UIDeviceOrientation.portrait: // Device oriented vertically, home button on the bottom
+            exifOrientation = .up
+        default:
+            exifOrientation = .up
+        }
+        return exifOrientation
+    }
 }
