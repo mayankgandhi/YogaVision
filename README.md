@@ -3,12 +3,9 @@
  
  ## Preview 
  
+[![Video Recognizer Preview](https://img.youtube.com/vi/WluGu5gdRXU/0.jpg)](https://www.youtube.com/watch?v=WluGu5gdRXU)
 
-Uploading LiveRecognizer.mov…
-
-
-
-https://user-images.githubusercontent.com/38678844/113196110-bed48500-9280-11eb-8a58-403651b409be.mov
+[![Live Recognizer Preview](https://img.youtube.com/vi/YOUTUBE_VIDEO_ID_HERE/0.jpg)](https://www.youtube.com/watch?v=YOUTUBE_VIDEO_ID_HERE)
 
 
  ## Folder Structure
