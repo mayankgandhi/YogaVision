@@ -27,14 +27,15 @@ final class LiveRecognizer: PoseRecognizer {
       }
     }
     requests = [visionRequest]
-  } 
+  }
 
-  func analyzeCurrentBuffer(pixelBuffer: CVPixelBuffer) {
+  func analyzeCurrentBuffer(pixelBuffer: CVPixelBuffer, completion: ()->Void ) {
     /// Get the CGImageOrientation reference to the UIDeviceOrientation
     /// used to perform Vision Request
     let exifOrientation = exifOrientationFromDeviceOrientation()
     do {
       try sequenceHandler.perform(requests, on: pixelBuffer, orientation: exifOrientation)
+      completion()
     } catch {
       print(error)
     }

@@ -18,6 +18,8 @@ class LiveRecognizerViewController: CameraBufferViewController {
   @Injected var mlInfo: MLInfo
 
   private var detectionOverlay: CALayer!
+  // Communicate with the session and other session objects on this queue.
+  private let semaphore = DispatchSemaphore(value: 0)
 
   override func setupAVCapture() {
     super.setupAVCapture()
@@ -62,8 +64,10 @@ class LiveRecognizerViewController: CameraBufferViewController {
     guard let pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else {
       return
     }
-    livePoseRecognizer.analyzeCurrentBuffer(pixelBuffer: pixelBuffer)
+    livePoseRecognizer.analyzeCurrentBuffer(pixelBuffer: pixelBuffer) {
+    }
   }
+
 
   func setupLayers() {
     detectionOverlay = CALayer() // container layer that has all the renderings of the observations
