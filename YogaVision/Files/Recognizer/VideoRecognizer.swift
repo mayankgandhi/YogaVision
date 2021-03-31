@@ -7,14 +7,26 @@
 
 import AVFoundation
 import Foundation
+import Resolver
 import Vision
 
 final class VideoRecognizer: PoseRecognizer {
+    @Injected var mlInfo: MLInfo
+
     func recognizeYogaPose(from url: URL) {
+        mlInfo.preload()
         grabPoses(from: url) { [self] poses in
             let poses = poses.prefix(predictionWindow).map { x in x }
-            if let prediction = self.makePrediction(posesWindow: poses) {
-                prediction.featureNames.forEach { print("\($0) - \(prediction.featureValue(for: $0))") }
+            DispatchQueue.main.async { self.mlInfo.progress = 60 }
+            guard let prediction = makePrediction(posesWindow: poses),
+                  let probabilities = prediction.featureValue(for: "labelProbabilities") else { return }
+            /// Calculate Probability Percentages that need to be drawn on screen
+            DispatchQueue.main.async {
+                self.mlInfo.progress = 100
+                mlInfo.mountainPose = probabilities.dictionaryValue["MountainPose"]!.floatValue * 100
+                mlInfo.plank = probabilities.dictionaryValue["Plank"]!.floatValue * 100
+                mlInfo.loading = false
+                mlInfo.show = true
             }
         }
     }
@@ -28,13 +40,16 @@ final class VideoRecognizer: PoseRecognizer {
             }
             if let poseObservations = vnRequest.results as? [VNHumanBodyPoseObservation] {
                 allPoses.append(contentsOf: poseObservations)
+                if allPoses.count == self.predictionWindow {
+                    completion(allPoses)
+                }
             }
         }
         do {
             let videoProcessor = VNVideoProcessor(url: assetURL)
             try videoProcessor.addRequest(visionRequest, processingOptions: VNVideoProcessor.RequestProcessingOptions())
             try videoProcessor.analyze(CMTimeRange(start: .zero, duration: CMTime(seconds: 3, preferredTimescale: .min)))
-            completion(allPoses)
+
         } catch {
             fatalError(error.localizedDescription)
         }

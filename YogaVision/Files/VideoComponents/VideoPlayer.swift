@@ -54,7 +54,7 @@ class VideoPlayerView: UIView, ObservableObject {
     func setup() {
         item = AVPlayerItem(url: videoURL)
         playerLayer.player = player
-        playerLayer.videoGravity = .resizeAspectFill
+        playerLayer.videoGravity = .resizeAspect
         layer.addSublayer(playerLayer)
         loopPlayer = AVPlayerLooper(player: player, templateItem: item!)
         player.play()

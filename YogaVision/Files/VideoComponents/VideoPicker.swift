@@ -7,6 +7,7 @@
 
 import AVFoundation
 import Foundation
+import Resolver
 import SwiftUI
 
 struct VideoPicker: UIViewControllerRepresentable {
@@ -15,8 +16,6 @@ struct VideoPicker: UIViewControllerRepresentable {
     @Binding var videoURL: URL
 
     var allowsEditing = true
-    var videoMaximumDuration: TimeInterval = 15
-
     typealias UIViewControllerType = UIImagePickerController
 
     func makeUIViewController(context: Context) -> UIImagePickerController {
@@ -26,7 +25,7 @@ struct VideoPicker: UIViewControllerRepresentable {
         myPickerController.allowsEditing = allowsEditing
         myPickerController.mediaTypes = ["public.movie"]
         myPickerController.videoQuality = .typeHigh
-        myPickerController.videoMaximumDuration = 30
+        myPickerController.videoMaximumDuration = 15
         myPickerController.videoExportPreset = AVAssetExportPreset1280x720
 
         return myPickerController
@@ -41,7 +40,9 @@ struct VideoPicker: UIViewControllerRepresentable {
     }
 
     class Coordinator: NSObject, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+        @Injected var videoRecognizer: VideoRecognizer
         let parent: VideoPicker
+        let fileService = FileService()
 
         init(_ parent: VideoPicker) {
             self.parent = parent
@@ -49,7 +50,10 @@ struct VideoPicker: UIViewControllerRepresentable {
 
         func imagePickerController(_: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
             if let url = info[.mediaURL] as? URL {
-                parent.videoURL = url
+                parent.videoURL = fileService.createTemporaryURLforVideoFile(url: url as NSURL)
+                DispatchQueue.global().async { [self] in
+                    videoRecognizer.recognizeYogaPose(from: parent.videoURL)
+                }
             }
             DispatchQueue.main.async {
                 self.parent.showVideoPicker = false

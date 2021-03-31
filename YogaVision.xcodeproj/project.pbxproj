@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		5C4FB99225FB44E50011E42D /* MLInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4FB99125FB44E50011E42D /* MLInfo.swift */; };
+		5C5AFB882614E64300CCA683 /* FileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5AFB872614E64300CCA683 /* FileService.swift */; };
 		5C7C1FBD25FB168B003610CA /* VideoRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7C1FBC25FB168B003610CA /* VideoRecognizer.swift */; };
 		5C7D6BBB25F758BB00982ED6 /* PoseRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7D6BBA25F758BB00982ED6 /* PoseRecognizer.swift */; };
 		5C7D6BBE25F75A2600982ED6 /* VideoPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7D6BBC25F75A2600982ED6 /* VideoPicker.swift */; };
@@ -44,6 +45,7 @@
 
 /* Begin PBXFileReference section */
 		5C4FB99125FB44E50011E42D /* MLInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLInfo.swift; sourceTree = "<group>"; };
+		5C5AFB872614E64300CCA683 /* FileService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileService.swift; sourceTree = "<group>"; };
 		5C7C1FBC25FB168B003610CA /* VideoRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoRecognizer.swift; sourceTree = "<group>"; };
 		5C7D6BBA25F758BB00982ED6 /* PoseRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoseRecognizer.swift; sourceTree = "<group>"; };
 		5C7D6BBC25F75A2600982ED6 /* VideoPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoPicker.swift; sourceTree = "<group>"; };
@@ -112,13 +114,33 @@
 			isa = PBXGroup;
 			children = (
 				5CC705F025F74219000C74FE /* ContentView.swift */,
-				5C4FB99125FB44E50011E42D /* MLInfo.swift */,
-				5C8CD17425F95A5800BC5FB9 /* LiveRecognizerViewController.swift */,
-				5C8CD17A25F95DAA00BC5FB9 /* CameraBufferViewController.swift */,
 				5C8CD17625F95A6F00BC5FB9 /* LiveRecognizer+Representable.swift */,
 				5CF6415225FE58040089573A /* TabSwitcherView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		5C5AFB852614D2E700CCA683 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				5C4FB99125FB44E50011E42D /* MLInfo.swift */,
+				5C8CD17425F95A5800BC5FB9 /* LiveRecognizerViewController.swift */,
+				5C8CD17A25F95DAA00BC5FB9 /* CameraBufferViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		5C5AFB862614D47B00CCA683 /* Files */ = {
+			isa = PBXGroup;
+			children = (
+				5C0DE22B25F7B80500491376 /* System */,
+				5C5AFB852614D2E700CCA683 /* ViewControllers */,
+				5C0DE22D25F7B81C00491376 /* Views */,
+				5C0DE22C25F7B81000491376 /* VideoComponents */,
+				5CBAEA1F25FBCF9B0018D8E2 /* MLModels */,
+				5CBAEA2225FBCFEB0018D8E2 /* Recognizer */,
+			);
+			path = Files;
 			sourceTree = "<group>";
 		};
 		5CBAEA1F25FBCF9B0018D8E2 /* MLModels */ = {
@@ -136,6 +158,7 @@
 				5C7D6BBA25F758BB00982ED6 /* PoseRecognizer.swift */,
 				5C7C1FBC25FB168B003610CA /* VideoRecognizer.swift */,
 				5CBAEA1D25FBC6810018D8E2 /* LiveRecognizer.swift */,
+				5C5AFB872614E64300CCA683 /* FileService.swift */,
 			);
 			path = Recognizer;
 			sourceTree = "<group>";
@@ -161,11 +184,7 @@
 		5CC705EB25F74219000C74FE /* YogaVision */ = {
 			isa = PBXGroup;
 			children = (
-				5C0DE22B25F7B80500491376 /* System */,
-				5C0DE22D25F7B81C00491376 /* Views */,
-				5C0DE22C25F7B81000491376 /* VideoComponents */,
-				5CBAEA1F25FBCF9B0018D8E2 /* MLModels */,
-				5CBAEA2225FBCFEB0018D8E2 /* Recognizer */,
+				5C5AFB862614D47B00CCA683 /* Files */,
 				5CC705F225F74220000C74FE /* Assets.xcassets */,
 				5CC705F725F74220000C74FE /* LaunchScreen.storyboard */,
 				5CC705FA25F74220000C74FE /* Info.plist */,
@@ -317,6 +336,7 @@
 				5C8CD17B25F95DAA00BC5FB9 /* CameraBufferViewController.swift in Sources */,
 				5C7D6BBF25F75A2600982ED6 /* VideoPlayer.swift in Sources */,
 				5CBAEA1E25FBC6810018D8E2 /* LiveRecognizer.swift in Sources */,
+				5C5AFB882614E64300CCA683 /* FileService.swift in Sources */,
 				5CCE240D25FA3ADC00AFD3C7 /* YogaImageClassifier.mlmodel in Sources */,
 				5C4FB99225FB44E50011E42D /* MLInfo.swift in Sources */,
 				5CBAEA2125FBCFE20018D8E2 /* YogaVision.mlmodel in Sources */,
