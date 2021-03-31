@@ -3,7 +3,13 @@
  
  ## Preview 
  
-[![Watch the video](/videoRecognizer.mov)
+
+Uploading LiveRecognizer.mov…
+
+
+
+https://user-images.githubusercontent.com/38678844/113196110-bed48500-9280-11eb-8a58-403651b409be.mov
+
 
  ## Folder Structure
  ```
