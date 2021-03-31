@@ -3,6 +3,7 @@
  
  ## Preview 
  
+[![Watch the video](/videoRecognizer.mov)
 
  ## Folder Structure
  ```
