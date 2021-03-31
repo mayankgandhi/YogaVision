@@ -29,8 +29,8 @@ class LiveRecognizerViewController: CameraBufferViewController {
     livePoseRecognizer.setupPoseVision { [self] (poseObservation) in
       guard let poseObservation = poseObservation else { return }
       DispatchQueue.main.async {
-        let points = processObservation(poseObservation, normalizedFor: view.bounds)
-        drawVisionRequestResults(points)
+        let drawPoints = processObservation(poseObservation, normalizedFor: view.bounds)
+        drawVisionRequestResults(drawPoints)
       }
     }
     // start the capture
@@ -38,10 +38,6 @@ class LiveRecognizerViewController: CameraBufferViewController {
   }
 
   func drawVisionRequestResults(_ points: [CGPoint]) {
-    CATransaction.begin()
-    CATransaction.setValue(kCFBooleanTrue, forKey: kCATransactionDisableActions)
-    detectionOverlay.sublayers = nil // remove all the old recognized objects
-
     livePoseRecognizer.performPrediction { (arg0) in
       let (mountainPose, plankPose) = arg0
       DispatchQueue.main.async { [self] in
@@ -50,20 +46,24 @@ class LiveRecognizerViewController: CameraBufferViewController {
       }
     }
 
-    points.forEach { point in
-      let shapeLayer = self.createBodyPoint(point)
-      detectionOverlay.addSublayer(shapeLayer)
-    }
+    DispatchQueue.main.async { [self] in
+      CATransaction.begin()
+      CATransaction.setValue(kCFBooleanTrue, forKey: kCATransactionDisableActions)
+      detectionOverlay.sublayers = nil // remove all the old recognized objects
 
-    updateLayerGeometry()
-    CATransaction.commit()
+      points.forEach { point in
+        let shapeLayer = self.createBodyPoint(point)
+        detectionOverlay.addSublayer(shapeLayer)
+      }
+
+      updateLayerGeometry()
+      CATransaction.commit()
+    }
   }
 
   override func captureOutput(_: AVCaptureOutput,
                               didOutput sampleBuffer: CMSampleBuffer, from _: AVCaptureConnection) {
-    guard let pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else {
-      return
-    }
+    guard let pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else { return }
     livePoseRecognizer.analyzeCurrentBuffer(pixelBuffer: pixelBuffer) {
     }
   }
@@ -91,11 +91,10 @@ class LiveRecognizerViewController: CameraBufferViewController {
       guard let point = bodyPoints[$0], point.confidence > 0 else { return nil }
 
       // Translate the point from normalized-coordinates to image coordinates.
-      return VNImagePointForNormalizedPoint(point.location,
-                                            Int(viewBounds.width),
-                                            Int(viewBounds.height))
+      return VNImagePointForNormalizedPoint(point.location, Int(view.bounds.size.width), Int(view.bounds.size.height))
     }
     // return the points to be drawn on screen.
+
     return imagePoints
   }
   

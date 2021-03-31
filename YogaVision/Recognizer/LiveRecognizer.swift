@@ -23,7 +23,8 @@ final class LiveRecognizer: PoseRecognizer {
         fatalError(error.localizedDescription)
       }
       if let poseObservations = vnRequest.results {
-        completion(transformBodyPoseObservation(from: poseObservations))
+        let bodyPoseObservations = transformBodyPoseObservation(from: poseObservations)
+        completion(bodyPoseObservations)
       }
     }
     requests = [visionRequest]
