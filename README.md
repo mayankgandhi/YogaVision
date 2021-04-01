@@ -8,8 +8,9 @@ Checkout my Medium article - Where I document the process of building this app -
  
  ## Preview (Youtube Preview Links)
  
+### Live Recognizer Preview 
 [![Live Recognizer Preview](https://img.youtube.com/vi/WluGu5gdRXU/0.jpg)](https://www.youtube.com/watch?v=WluGu5gdRXU)
-
+### Video Recognizer Preview
 [![Video Recognizer Preview](https://img.youtube.com/vi/AxNYRU1NQ9U/0.jpg)](https://www.youtube.com/watch?v=AxNYRU1NQ9U)
 
 
